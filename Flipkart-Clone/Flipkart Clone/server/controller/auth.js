@@ -11,7 +11,7 @@ export const signIn = async (req, res) => {
             return res.status(400).json({ error });
         if (user) {
             if (user.authenticate(req.body.password)) {
-                const token = jwt.sign({ _id: user._id }, process.env.AUTH_TOKEN, { expiresIn: '1h' });
+                const token = jwt.sign({ _id: user._id,role: user.role }, process.env.AUTH_TOKEN, { expiresIn: '1h' });
                 const { _id, firstName, lastName, email, role, fullName } = user;
 
                 res.status(200).json({
@@ -60,10 +60,3 @@ export const signUp = async (req, res) => {
 
 }
 
-export const requireSignin = (req,res,next) => {
-    const token = req.headers.authorization;
-    const user = jwt.verify(token,process.env.AUTH_TOKEN);
-    console.log(user._id);
-    req.user = user;
-    next();
-}

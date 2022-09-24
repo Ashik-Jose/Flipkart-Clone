@@ -1,6 +1,7 @@
 import express from 'express';
-import { requireSignin, signIn, signUp } from '../controller/auth.js';
+import { signIn, signUp } from '../controller/auth.js';
 import { requestResult, validationSignInRequest, validationSignUpRequest } from '../validator/auth.js';
+import { requireSignin } from '../common middleware/index.js';
 
 const router = express.Router();
 

@@ -1,8 +1,10 @@
 import express from "express";
-import {categorycreate} from "../controller/category.js";
+import { adminMiddleWare, requireSignin } from "../common middleware/index.js";
+import {categorycreate, getCategory} from "../controller/category.js";
 
 const router = express.Router();
 
-router.post('/create',categorycreate);
+router.post('/create',requireSignin,adminMiddleWare,categorycreate);
+router.get('/getcategories',getCategory);
 
 export default router;
