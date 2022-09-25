@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import authRoutes from './routes/auth.js';
 import adminRoutes from './routes/admin/auth.js';
 import categoryRouter from "./routes/category.js";
+import productRouter from "./routes/product.js";
 
 const app = express();
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/api',authRoutes);
 app.use('/api/admin',adminRoutes);
 app.use('/api/category',categoryRouter);
+app.use('/api/product',productRouter);
 
 app.get('/',(req,res,next) => {
     res.status(200).json({
