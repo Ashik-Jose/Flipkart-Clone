@@ -2,20 +2,20 @@ import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Layout from '../../components/Layouts/index.js';
 import Inputs from '../../components/UI/Inputs/index.js';
-import {login} from '../../actions';
+import {login} from '../../actions/auth.action.js';
+import {useDispatch} from 'react-redux';
 
 const SignIn = () => {
 
+    const dispatch = useDispatch();
     const userLogin=(e)=> {
 
         e.preventDefault();
-
         const user = {
-            email:'',
-            password:''
+            email:'aeds',
+            password:'sdef'
         }
-
-        login(user);
+        dispatch(login(user));
     }
 
     return (
@@ -24,7 +24,7 @@ const SignIn = () => {
             <Container>
                 <Row style={{marginTop: '50px'}}>
                     <Col md={{span: 6, offset: 3}}>
-                        <Form onSubmit={()=> login({email:'',password:''})}>
+                        <Form onSubmit={userLogin}>
                            <Row>
                             <Col md={10}>
                             <Inputs 

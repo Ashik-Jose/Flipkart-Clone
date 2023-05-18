@@ -1,9 +1,12 @@
-import { authConstants } from ". "
+import { authConstants } from "./constants";
 
-export const login = (user)=> {
-    return (dispatch) => {
-        dispatch({type:authConstants.LOGIN_REQUEST,payload:{
-            ...user
-        }})
-    }
-}
+export const login = (user) => {
+  return (dispatch) => {
+    dispatch({
+      type: authConstants.LOGIN_REQUEST,
+      payload: {
+        ...user,
+      },
+    });
+  };
+};
