@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Layout from '../../components/Layouts/index.js';
 import Inputs from '../../components/UI/Inputs/index.js';
 import {login} from '../../actions/auth.action.js';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 const SignIn = () => {
 
     const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const auth = useSelector(state => state.auth);
+
     const userLogin=(e)=> {
 
         e.preventDefault();
         const user = {
-            email:'aeds',
-            password:'sdef'
+            email,password
         }
         dispatch(login(user));
+    }
+
+    if(auth.authenticate){
+        return <Navigate to={'/'}/>
     }
 
     return (
@@ -31,16 +41,16 @@ const SignIn = () => {
                             label="Email"
                             type="email"
                             placeholder="Email"
-                            value=""
-                            onChange={() => {}}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             />
                             </Col>
                             <Inputs 
                             label="Password"
                             type="password"
                             placeholder="Password"
-                            value=""
-                            onChange={() => {}}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             />
                            </Row>
                             <Button variant="primary" type="submit">
