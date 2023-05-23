@@ -1,16 +1,56 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { NavLink,Link } from 'react-router-dom';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { NavLink, Link } from "react-router-dom";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../../actions/auth.action";
 
-const Header = ({props}) => {
+const Header = ({ props }) => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const loggedInLinks = () => {
+    return (
+      <Nav>
+      <li className="nav-item">
+        <span className="nav-link" style={{cursor:"pointer"}} onClick={()=> dispatch(signout())}>Sign Out</span>
+      </li>
+      </Nav>
+    );
+  };
+
+  const nonLoggedInLinks = () => {
+    return (
+      <Nav>
+        <li className="nav-item">
+          <NavLink to="/signIn" className="nav-link">
+            SignIn
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/signUp" className="nav-link">
+            SignUp
+          </NavLink>
+        </li>
+      </Nav>
+    );
+  };
+
   return (
-    <div className='header'>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
+    <div className="header">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        style={{ zIndex: 1 }}
+      >
+        <Container fluid>
           {/* <Navbar.Brand href="#home">Admin Dashboard</Navbar.Brand> */}
-          <Link to='/' className='navbar-brand'>Admin Dashboard</Link>
+          <Link to="/" className="navbar-brand">
+            Admin Dashboard
+          </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -26,20 +66,12 @@ const Header = ({props}) => {
               </NavDropdown.Item>
             </NavDropdown> */}
             </Nav>
-            <Nav>
-              <li className='nav-item'>
-                <NavLink to="/signIn" className="nav-link">SignIn</NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink to="/signUp" className='nav-link'>SignUp</NavLink>
-              </li>
-            </Nav>
+            {auth.authenticate ? loggedInLinks() : nonLoggedInLinks()}
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </div>
-
-  )
-}
+  );
+};
 
 export default Header;
