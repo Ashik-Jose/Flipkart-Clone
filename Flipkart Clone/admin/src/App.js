@@ -8,6 +8,8 @@ import PrivateRoutes from "./HOC/privateRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { isUserLoggedIn } from "./actions/auth.action";
+import Product from "./containers/Products";
+import Order from "./containers/Orders";
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route path="/" exact element={<Home />} />
+            <Route path="/products" element={<Product />} />
+            <Route path="/orders" element={<Order />} />
           </Route>
           <Route path="/signIn" exact element={<SignIn />} />
 
