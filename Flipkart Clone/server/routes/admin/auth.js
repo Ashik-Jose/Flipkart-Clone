@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.post('/signIn',validationSignInRequest,requestResult,signIn);
 router.post('/signUp',validationSignUpRequest,requestResult,signUp);
-router.post('/signOut',requireSignin,signOut);
+router.post('/signOut',signOut);
 
 export default router;

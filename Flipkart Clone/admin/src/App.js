@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { isUserLoggedIn } from "./actions/auth.action";
 import Product from "./containers/Products";
 import Order from "./containers/Orders";
+import Category from "./containers/Category";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route path="/" exact element={<Home />} />
+            <Route path="/category" exact element={<Category />} />
             <Route path="/products" element={<Product />} />
             <Route path="/orders" element={<Order />} />
           </Route>
